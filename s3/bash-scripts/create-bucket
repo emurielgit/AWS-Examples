@@ -1,2 +1,14 @@
 #!/usr/bin/env bash
 
+echo "=== create bucket ==="
+
+if [ -z "$1" ]; then
+    echo "bucket name needed"
+    exit 1
+fi
+
+aws s3api create-bucket \
+--bucket $1 \
+--output text
+
+aws s3api get-bucket-location --bucket $1
