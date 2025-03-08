@@ -3,8 +3,13 @@ echo " == sync"
 
 set -e
 
-if [ -z "$2" ]; then
+if [ -z "$1" ]; then
     echo "bucket name needed"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "filename name needed"
     exit 1
 fi
 
@@ -20,7 +25,7 @@ mkdir -p $OUTPUT_DIR
 NUM_FILES=$((RANDOM % 6 + 5))
 
 for ((i=1; i<=NUM_FILES; i++)); do
-    FILENAME="$OUTPUT_DIR/$FILENAME_PREFIX_$i.txt"
+    FILENAME="$OUTPUT_DIR/${FILENAME_PREFIX}_$i.txt"
 
     dd if=/dev/urandom of="$FILENAME" bs=1024 count=$((RANDOM % 1024 +1 )) 2>/dev/null
 
