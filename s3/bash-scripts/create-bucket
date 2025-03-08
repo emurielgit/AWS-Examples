@@ -7,8 +7,10 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+BUCKET_NAME=$1
+
 aws s3api create-bucket \
---bucket $1 \
+--bucket $BUCKET_NAME \
 --output text
 
-aws s3api get-bucket-location --bucket $1
+aws s3api get-bucket-location --bucket $BUCKET_NAME
